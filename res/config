@@ -1,0 +1,9 @@
+#!/usr/local/bin/zsh
+
+CONSUL_URL_BASE=http://hansel.kungfoo.local:8550
+CONSUL_KV_REPO_TOKEN=forgejo/prod/token-repo
+REPO_USER=jhfoo
+
+DATA_DIR_EXT_BASE=/net/chie/disk/podman
+
+SUDO=sudo

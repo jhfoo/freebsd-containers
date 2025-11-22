@@ -1,4 +1,8 @@
 #!/usr/local/bin/zsh
+if [[ -z $1 ]]; then
+  echo "USAGE: build <app-name> [mode:dev] [--push|--no-push]" >&2
+  exit 1
+fi
 
 source ./bin/config $1 NULL --nodir
 

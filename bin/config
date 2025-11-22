@@ -1,4 +1,5 @@
 # container variables (change as needed)
+
 APP_NAME=$1
 APP_TAG=latest
 MODE=${2:-'dev'}
@@ -8,18 +9,27 @@ REPO_URL=localhost
 REPO_URL=hansel.kungfoo.local:3000/jhfoo
 IMAGE_NAME=${REPO_URL}/${APP_NAME}:${APP_TAG}
 
+echo "App name      : $APP_NAME"
+echo "Container name: $CONTAINER_NAME"
+echo "Image name    : $IMAGE_NAME"
+echo "==="
+
+source ./res/config
+
 full_vars() {
   source container/${APP_NAME}/bin/config $1
 
-  if [ ! -d "$DATA_DIR_EXT" ]; then
-    echo "Creating data directory at $DATA_DIR_EXT"
-    mkdir -p "$DATA_DIR_EXT"
-  fi
+  for dir in $DATA_DIR_EXT; do
+    if [ ! -d $dir ]; then
+      echo "- Creating volume path: $dir"
+      $SUDO mkdir -p $dir
+    fi
+  done
+
 }
 
 if [[ -z $3 || $3 != "--nodir" ]]; then
   full_vars
 fi
 
-echo "Container Image: $APP_NAME"
 

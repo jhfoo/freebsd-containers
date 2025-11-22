@@ -1,4 +1,9 @@
 #!/usr/local/bin/zsh
+if [[ -z $1 ]]; then
+  echo "USAGE: stop <app-name> [mode:dev] [--nodel]" >&2
+  exit 1
+fi
+
 MODE=${2:-'dev'}
 source ./bin/config $1 $MODE --nodir
 ISDEL=true
@@ -9,7 +14,7 @@ for arg in "$@"; do
   fi
 done
 
-echo "Stopping container $CONTAINER_NAME"
+echo "- Stopping container $CONTAINER_NAME"
 sudo podman stop $CONTAINER_NAME 
 sudo podman ps -a | grep $CONTAINER_NAME
 

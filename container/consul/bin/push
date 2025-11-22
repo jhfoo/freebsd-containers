@@ -1,8 +1,0 @@
-#!/usr/local/bin/zsh
-source ./bin/config --nodir
-
-TOKEN=$(cat ./res/token)
-
-echo "Pushing image $IMAGE_NAME"
-sudo podman push --creds=jhfoo:$TOKEN \
-  $IMAGE_NAME

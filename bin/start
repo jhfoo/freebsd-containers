@@ -1,7 +1,7 @@
 #!/usr/local/bin/zsh
 source ./bin/config
 
-echo "Starting container $CONTAINER_NAME"
+echo "- Starting container $CONTAINER_NAME"
 sudo podman run -dt --restart=always \
   --name $CONTAINER_NAME \
   "${PORTMAP[@]}" \
