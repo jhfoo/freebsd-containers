@@ -6,7 +6,7 @@ Still learning what best-practice really means so don't take the collection as g
 
 # Assumptions
 ## Home use
-This setup is currently not design for commercial or production. Decisions are biased towards home setups.
+This setup is not designed for commercial or production. Decisions are biased towards home setups.
 
 # Best practices
 ## Store secrets e.g. tokens in KV
