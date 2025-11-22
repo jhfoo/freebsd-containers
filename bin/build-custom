@@ -1,0 +1,36 @@
+#!/usr/local/bin/zsh
+ARCH=${1:-'amd64'}
+RELEASE=${2:-'14.3'}
+SUDO=sudo
+
+source ./res/config
+source ./bin/config-util
+
+IMAGE_NAME=${REPO_URL}/freebsd-base-custom-${ARCH}:${RELEASE}
+
+echo "Arch   : $ARCH"
+echo "Release: $RELEASE"
+echo "Image  : $IMAGE_NAME"
+echo "==="
+
+buildImage() {
+    cd container/custombase
+    URL="https://download.freebsd.org/ftp/releases/${ARCH}/${RELEASE}-RELEASE/base.txz"
+    echo "Fetching $URL"
+    mkdir -p res
+    fetch $URL -o res/
+    $SUDO podman build --no-cache -t $IMAGE_NAME .
+
+    # Cleanup
+    rm res/base.txz
+}
+
+buildImage
+pushImage $IMAGE_NAME
+
+#$SUDO podman import --os freebsd \
+#    --arch $ARCH \
+#    --message 'Import FreeBSD $RELEASE base.txz' \
+#    https://download.freebsd.org/ftp/releases/${ARCH}/${RELEASE}/base.txz
+
+#$SUDO podman image ls -a | grep <none>

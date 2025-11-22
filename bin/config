@@ -5,8 +5,8 @@ APP_TAG=latest
 MODE=${2:-'dev'}
 CONTAINER_NAME=${APP_NAME}-${MODE}
 
-REPO_URL=localhost
-REPO_URL=hansel.kungfoo.local:3000/jhfoo
+source ./res/config
+
 IMAGE_NAME=${REPO_URL}/${APP_NAME}:${APP_TAG}
 
 echo "App name      : $APP_NAME"
@@ -14,7 +14,6 @@ echo "Container name: $CONTAINER_NAME"
 echo "Image name    : $IMAGE_NAME"
 echo "==="
 
-source ./res/config
 
 full_vars() {
   source container/${APP_NAME}/bin/config $1

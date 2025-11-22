@@ -1,9 +1,16 @@
 #!/usr/local/bin/zsh
 
-CONSUL_URL_BASE=http://hansel.kungfoo.local:8550
+#REPO_URL=localhost
+REPO_URL=hansel.kungfoo.local:3000/jhfoo
+
+# dev consul
+#CONSUL_URL_BASE=http://hansel.kungfoo.local:8550
+# prod consul
+CONSUL_URL_BASE=http://hansel.kungfoo.local:8500
+
+#CONSUL_KV_REPO_TOKEN=forgejo/dev/token-repo
 CONSUL_KV_REPO_TOKEN=forgejo/prod/token-repo
+
 REPO_USER=jhfoo
-
 DATA_DIR_EXT_BASE=/net/chie/disk/podman
-
 SUDO=sudo

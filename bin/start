@@ -2,6 +2,7 @@
 source ./bin/config
 
 echo "- Starting container $CONTAINER_NAME"
+echo "- [debug] VOLMAP: ${VOLMAP[@]}"
 sudo podman run -dt --restart=always \
   --name $CONTAINER_NAME \
   "${PORTMAP[@]}" \
