@@ -1,0 +1,8 @@
+#!/usr/local/bin/zsh
+MODE=${1:-'dev'}
+ISDEL=${2:-''}
+CONTAINER_NAME="forgejo-$MODE"
+
+if $ISDEL; then
+  sudo podman rm $CONTAINER_NAME
+fi

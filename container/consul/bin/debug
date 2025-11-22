@@ -1,0 +1,13 @@
+#!/usr/local/bin/zsh
+#IMAGE_NAME=${1:-'localhost/bkagent'}
+IMAGE_NAME="localhost/forgejo:latest"
+echo "Image: $IMAGE_NAME"
+NAME="forgejo-debug"
+
+#sudo podman run -it --rm $IMAGE_NAME
+#sudo podman run -dt --name uptime-primary -p 3001:3001/tcp $IMAGE_NAME
+sudo podman run -it --rm \
+  --name $NAME \
+  -p 3300:3000/tcp \
+  -v /net/chie/disk/podman/forgejo/dev:/var/db/forgejo \
+  $IMAGE_NAME

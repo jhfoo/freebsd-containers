@@ -1,0 +1,10 @@
+{
+  "server": true,
+  "bootstrap_expect": 1,
+  "datacenter": "th1",
+  "data_dir": "/app/data",
+  "node_name": "consul-prod-1",
+  "client_addr": "0.0.0.0",
+  "bind_addr": "0.0.0.0",
+  "ui": true
+}

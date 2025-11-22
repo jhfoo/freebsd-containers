@@ -1,0 +1,23 @@
+#FROM localhost/freebsd-base:14.3-RELEASE
+FROM docker.io/freebsd/freebsd-runtime:14.3
+
+# share pkg cache with host
+VOLUME /var/cache/pkg
+#VOLUME /var/db/forgejo
+
+#RUN env ASSUME_ALWAYS_YES=yes pkg bootstrap -f
+RUN pkg install -y consul 
+
+# configure access for user git
+RUN mkdir -p /usr/local/etc/consul.d
+COPY res/core.json /usr/local/etc/consul.d/core.json
+#COPY res/chown /usr/sbin/chown
+#RUN /usr/sbin/chown git /usr/local/etc/forgejo/conf/app.ini
+
+RUN mkdir -p /app/data
+#USER git
+# WORKDIR /app
+# RUN bin/setup
+#ENV PLAYWRIGHT_BROWSERS_PATH=/nonexistent
+ENTRYPOINT /usr/local/bin/consul agent -config-dir /usr/local/etc/consul.d
+#ENTRYPOINT /bin/sh

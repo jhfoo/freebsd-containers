@@ -1,0 +1,25 @@
+# container variables (change as needed)
+APP_NAME=$1
+APP_TAG=latest
+MODE=${2:-'dev'}
+CONTAINER_NAME=${APP_NAME}-${MODE}
+
+REPO_URL=localhost
+REPO_URL=hansel.kungfoo.local:3000/jhfoo
+IMAGE_NAME=${REPO_URL}/${APP_NAME}:${APP_TAG}
+
+full_vars() {
+  source container/${APP_NAME}/bin/config $1
+
+  if [ ! -d "$DATA_DIR_EXT" ]; then
+    echo "Creating data directory at $DATA_DIR_EXT"
+    mkdir -p "$DATA_DIR_EXT"
+  fi
+}
+
+if [[ -z $3 || $3 != "--nodir" ]]; then
+  full_vars
+fi
+
+echo "Container Image: $APP_NAME"
+

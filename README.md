@@ -10,5 +10,5 @@ This setup is currently not design for commercial or production. Decisions are b
 
 # Best practices
 ## Store secrets e.g. tokens in KV
-1. Ideally in Vault.
+1. Ideally in Vault (BACKLOG).
 2. Implementation using Consul since this is for home use.

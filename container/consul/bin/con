@@ -1,0 +1,4 @@
+IMAGE_NAME=${1:-'localhost/forgejo:latest'}
+echo "Image: $IMAGE_NAME"
+
+sudo podman run -it --rm $IMAGE_NAME /bin/sh

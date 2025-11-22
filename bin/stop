@@ -1,0 +1,21 @@
+#!/usr/local/bin/zsh
+MODE=${2:-'dev'}
+source ./bin/config $1 $MODE --nodir
+ISDEL=true
+
+for arg in "$@"; do
+  if [[ $arg = "--nodel" ]]; then
+    ISDEL=false
+  fi
+done
+
+echo "Stopping container $CONTAINER_NAME"
+sudo podman stop $CONTAINER_NAME 
+sudo podman ps -a | grep $CONTAINER_NAME
+
+if [[ $ISDEL = true ]]; then
+  echo "Deleting container $CONTAINER_NAME"
+  sudo podman rm $CONTAINER_NAME
+else
+  echo "Skipping deletion of container $CONTAINER_NAME"
+fi

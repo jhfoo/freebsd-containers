@@ -1,0 +1,11 @@
+#!/usr/local/bin/zsh
+source ./bin/config
+
+sudo podman run -it --rm \
+  --name $CONTAINER_NAME \
+  -p $PORT_EXT:$PORT_INT/tcp \
+  -v $DATA_DIR_EXT:$DATA_DIR_INT \
+  $IMAGE_NAME
+
+#sudo podman run -it --rm $IMAGE_NAME /bin/sh
+#sudo podman run $IMAGE_NAME

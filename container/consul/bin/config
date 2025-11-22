@@ -1,0 +1,19 @@
+
+PORT_EXT=8550
+
+if [ "$MODE" = "prod" ]; then
+    PORT_EXT=8500
+fi
+
+# derived variables (should not change)
+PORT_INT=8500
+DATA_DIR_EXT=/net/chie/disk/podman/${APP_NAME}/${MODE}
+DATA_DIR_INT=/app/data
+
+if [ ! -d "$DATA_DIR_EXT" ]; then
+    echo "Creating data directory at $DATA_DIR_EXT"
+    mkdir -p "$DATA_DIR_EXT"
+fi
+
+PORTMAP=("-p" "${PORT_EXT}:${PORT_INT}/tcp")
+VOLMAP=("-v" "$DATA_DIR_EXT:$DATA_DIR_INT")

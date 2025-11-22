@@ -1,0 +1,10 @@
+#!/usr/local/bin/zsh
+source ./bin/config
+
+echo "Starting container $CONTAINER_NAME"
+sudo podman run -dt --restart=always \
+  --name $CONTAINER_NAME \
+  "${PORTMAP[@]}" \
+  "${VOLMAP[@]}" \
+  $IMAGE_NAME
+sudo podman ps | grep $CONTAINER_NAME

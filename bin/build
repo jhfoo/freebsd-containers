@@ -1,0 +1,30 @@
+#!/usr/local/bin/zsh
+
+source ./bin/config $1 NULL --nodir
+
+PUSH="ask"
+for arg in "$@"; do
+  case $arg in
+    --push)
+      PUSH="true" ;;
+    --no-push|--skip-push)
+      PUSH="false" ;;
+    --help|-h)
+      echo "Usage: $0 [--push|--no-push]"; exit 0 ;;
+  esac
+done
+
+echo $IMAGE_NAME
+
+cd container/$APP_NAME
+sudo podman build --no-cache -t $IMAGE_NAME \
+  -v /var/cache/pkg:/var/cache/pkg \
+  -f Containerfile
+
+read -q "REPLY?Push image $IMAGE_NAME to registry? [y/N] "
+echo
+if [[ $REPLY == [yY] ]]; then
+  source ./bin/push
+fi
+
+sudo podman image ls | grep $IMAGE_NAME
