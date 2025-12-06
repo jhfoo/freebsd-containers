@@ -1,11 +1,10 @@
 #!/usr/local/bin/zsh
 source ./bin/config $1 'IGNORE' --nodir
-APP_TAG=${2:-latest}
-IMAGE_NAME=${REPO_URL}/${APP_NAME}:${APP_TAG}
+
+IMAGE_NAME=$1
 
 #TOKEN=$(cat ./res/token)
 url="${CONSUL_URL_BASE}/v1/kv/${CONSUL_KV_REPO_TOKEN}?raw"
-
 REPO_TOKEN=`curl "${url}"`
 echo "Token fetched: $REPO_TOKEN"
 

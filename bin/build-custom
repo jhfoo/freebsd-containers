@@ -1,6 +1,6 @@
 #!/usr/local/bin/zsh
 ARCH=${1:-'amd64'}
-RELEASE=${2:-'14.3'}
+RELEASE=${2:-'15.0'}
 SUDO=sudo
 
 source ./res/config
